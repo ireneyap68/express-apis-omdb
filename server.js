@@ -24,7 +24,7 @@ app.get('/', function(req, res) {
 });
 
 app.get('/results', (req, res) =>{
-  let search = req.query.search
+  let search = req.query.movie
   let qs = {
     params: {
       s: search,
@@ -44,8 +44,8 @@ app.get('/results', (req, res) =>{
   })
 })
 
-app.get('/movie/:id', (req,res) =>{
-  let imdbID = req.params.id
+app.get('/movie/:movie_id', (req,res) =>{
+  let imdbID = req.params.movie_id
 
   let qs = {
     params: {
@@ -57,9 +57,9 @@ app.get('/movie/:id', (req,res) =>{
   axios.get('http://www.omdbapi.com', qs)
   .then((response) =>{
     console.log(response.data)
-    let movieDetail = response.data.Search
+    let movieDetail = response.data;
     //setting a variable to data
-    res.render('details', {data: movieDetail})
+    res.render('detail', {data: movieDetail})
   })
   .catch(err =>{
     console.log(err)
@@ -70,7 +70,7 @@ app.get('/movie/:id', (req,res) =>{
 
 
 // The app.listen function returns a server handle
-var server = app.listen(process.env.PORT || 8000);
+var server = app.listen(process.env.PORT || 3000);
 
 // We can export this server to other servers like this
 module.exports = server;

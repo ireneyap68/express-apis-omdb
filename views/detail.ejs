@@ -2,8 +2,18 @@
 <% // This is how to do comments in EJS, by the way... %>
 <h1><%= data.Title  %> </h1>
     <img src="<%=data.Poster%> " alt="<%=data.title %> Poster ">
-    <p><%= data.Plot %> </p>
-    <p><%= data.Director %> </p>
-    <p><%= data.Writer %> </p>
-    <p><%= data.Actors %> </p>
-    <p><%= data.Awards %> </p>
+   <% if (data.Plot) { %> 
+    <p>Plot: <%= data.Plot %> </p>
+   <% } else { %>
+    <p>There's no plot listed </p> 
+   <% } %> 
+    <p>Director: <%= data.Director %> </p>
+    <p>Writer: <%= data.Writer %> </p>
+    <p>Actors: <%= data.Actors %> </p>
+    <p>Awards: <%= data.Awards %> </p>
+
+    <form method="POST" action="/faves">
+        <input type="hidden" name="title" value="<%= data.Title%>" >
+        <input type="hidden" name="imdbid" value="<% data.imdbID %> ">
+        <input type="submit" value="Add Favorite" >
+    </form>
